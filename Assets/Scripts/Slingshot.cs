@@ -9,6 +9,19 @@ public class Slingshot : MonoBehaviour
     public GameObject projectilePrefab;
     public float velocityMult = 10f;
     public GameObject projLinePrefab;
+    [SerializeField] private LineRenderer rubber;
+    [SerializeField] private Transform LeftArm;
+    [SerializeField] private Transform RightArm;
+
+    void Start(){
+
+        rubber.SetPosition(0, LeftArm.position);
+        rubber.SetPosition(1, LeftArm.position);
+        rubber.SetPosition(2, RightArm.position);
+
+
+    }
+    
 
     [Header("Dynamic")]
     public GameObject launchPoint;
@@ -62,8 +75,10 @@ public class Slingshot : MonoBehaviour
 
         Vector3 projPos = launchPos + mouseDelta;
         projectile.transform.position = projPos;
+        rubber.SetPosition(1, projPos);
 
         if (Input.GetMouseButtonUp(0)) {
+            rubber.SetPosition(1, LeftArm.position);
             aimingMode = false;
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
