@@ -596,8 +596,8 @@ MonoBehaviour:
   rubber: {fileID: 507516481}
   LeftArm: {fileID: 149885833}
   RightArm: {fileID: 762863523}
-  slingShotLaunchSound: {fileID: 0}
-  slingShotPrepareSound: {fileID: 0}
+  slingShotLaunchSound: {fileID: 8300000, guid: cd239659cd25d0048b4f59510da6eab9, type: 3}
+  slingShotPrepareSound: {fileID: 8300000, guid: a28ecb1acc33f144f8085f1ae970ca4e, type: 3}
   launchPoint: {fileID: 2064196820}
   launchPos: {x: 0, y: 0, z: 0}
   projectile: {fileID: 0}
