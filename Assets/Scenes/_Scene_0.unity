@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.45140117, g: 0.5008937, b: 0.5723182, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -595,6 +596,8 @@ MonoBehaviour:
   rubber: {fileID: 507516481}
   LeftArm: {fileID: 149885833}
   RightArm: {fileID: 762863523}
+  slingShotLaunchSound: {fileID: 0}
+  slingShotPrepareSound: {fileID: 0}
   launchPoint: {fileID: 2064196820}
   launchPos: {x: 0, y: 0, z: 0}
   projectile: {fileID: 0}
@@ -1121,7 +1124,6 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0

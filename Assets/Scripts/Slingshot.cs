@@ -12,6 +12,8 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private LineRenderer rubber;
     [SerializeField] private Transform LeftArm;
     [SerializeField] private Transform RightArm;
+    [SerializeField] private AudioClip slingShotLaunchSound;
+    [SerializeField] private AudioClip slingShotPrepareSound;
 
     void Start(){
 
@@ -56,6 +58,8 @@ public class Slingshot : MonoBehaviour
         projectile = Instantiate(projectilePrefab) as GameObject;
         projectile.transform.position = launchPos;
         projectile.GetComponent<Rigidbody>().isKinematic = true;
+
+        AudioSource.PlayClipAtPoint(slingShotPrepareSound, transform.position);
     }
 
     void Update()
@@ -91,6 +95,9 @@ public class Slingshot : MonoBehaviour
             Instantiate<GameObject>(projLinePrefab, projectile.transform);
             projectile = null;
             MissionDemolition.SHOT_FIRED();
+            
+            // Add sound effect
+            AudioSource.PlayClipAtPoint(slingShotLaunchSound, transform.position);
         }
     }
 }
