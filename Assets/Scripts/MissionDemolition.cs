@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum GameMode {
     idle,
@@ -72,6 +73,7 @@ public class MissionDemolition : MonoBehaviour {
         if (level == levelMax) {
             level = 0;
             shotsTaken = 0;
+            SceneManager.LoadScene("_Scene_Victory");
         }
 
         StartLevel();
