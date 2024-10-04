@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
     private Vector3 prevPos;
     private List<float> deltas = new List<float>();
     private Rigidbody rigid;
+    public bool hasExploded = false;
 
     void Start() {
         rigid = this.GetComponent<Rigidbody>();
@@ -59,6 +60,40 @@ public class Projectile : MonoBehaviour
     public static void DESTROY_PROJECTILES() {
         foreach (Projectile proj in PROJ_LIST) {
             Destroy(proj.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        Projectile otherProjectile = collision.gameObject.GetComponent<Projectile>();
+        if (otherProjectile != null && otherProjectile != this && !this.hasExploded) {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            Rigidbody otherRb = otherProjectile.GetComponent<Rigidbody>();
+
+            if (rb != null && otherRb != null) {
+                if (rb.velocity.magnitude > otherRb.velocity.magnitude) {
+                    Explode(otherProjectile);
+                } else {
+                    otherProjectile.Explode(this);
+                }
+            }
+        }
+    }
+
+    private void Explode(Projectile otherProjectile) {
+        this.hasExploded = true;
+
+        Destroy(otherProjectile.gameObject);
+
+        float explosionRadius = 3.0f;
+        float explosionForce = 4000.0f;
+        Vector3 explosionPosition = otherProjectile.transform.position;
+
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
+        foreach (Collider hit in colliders) {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null && hit.CompareTag("Wall")) {
+                rb.AddExplosionForce(explosionForce, explosionPosition, explosionRadius);
+            }
         }
     }
 }
